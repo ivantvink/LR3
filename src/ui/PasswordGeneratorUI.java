@@ -1,5 +1,7 @@
 package ui;
 
+import logic.PasswordGenerator;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -75,7 +77,23 @@ public class PasswordGeneratorUI {
         constraints.gridwidth = 3;
         frame.add(generateButton, constraints);
 
+        // Обработка события нажатия на кнопку генерации пароля
+        generateButton.addActionListener(e -> generatePassword());
+
         // Отображение окна
         frame.setVisible(true);
+    }
+    private void generatePassword() {
+        int length = lengthSlider.getValue();
+        boolean useNumbers = includeNumbers.isSelected();
+        boolean useUppercase = includeUppercase.isSelected();
+        boolean useSymbols = includeSymbols.isSelected();
+
+        try {
+            String password = PasswordGenerator.generate(length, useNumbers, useUppercase, useSymbols);
+            passwordField.setText(password);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Generation Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
