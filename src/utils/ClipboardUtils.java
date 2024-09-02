@@ -11,4 +11,10 @@ public class ClipboardUtils {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
         JOptionPane.showMessageDialog(null, "Password copied to clipboard!");
     }
+
+    // Дополнительный метод для очистки буфера обмена
+    public static void clearClipboard() {
+        StringSelection selection = new StringSelection("");
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+    }
 }
