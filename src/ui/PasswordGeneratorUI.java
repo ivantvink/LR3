@@ -1,6 +1,7 @@
 package ui;
 
 import logic.PasswordGenerator;
+import utils.ClipboardUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,6 +93,7 @@ public class PasswordGeneratorUI {
         try {
             String password = PasswordGenerator.generate(length, useNumbers, useUppercase, useSymbols);
             passwordField.setText(password);
+            ClipboardUtils.copyToClipboard(password);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Generation Error", JOptionPane.ERROR_MESSAGE);
         }
